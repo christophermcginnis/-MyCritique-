@@ -1,0 +1,620 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;800&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+:root {
+    /*#38c5e8*/
+    --color-primary: #7e26d1;
+    --color-secondary: #d62759;
+    --color-primary-alt: #52796f;
+    --color-secondary-alt: #84a98c;
+    --color-accent: #000000;
+
+    --gradient: linear-gradient(45deg,var(--color-primary), var(--color-secondary))
+}
+
+.visually-hidden {
+    position: absolute;
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 1em;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: var(--color-primary);
+    border-radius: 100px;
+}
+
+.login-container::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.animated-bg {
+    width: 100%;
+    height: 100%;
+    background-image: var(--gradient);
+    background-size: 300%;
+    animation: animated-bg 3s infinite alternate;
+}
+
+@keyframes animated-bg {
+    0% {
+        background-position: left;
+    }
+
+    100% {
+        background-position: right;
+    }
+}
+
+.background {
+    width: 100%;
+    height: 40vw;
+    background-image: var(--gradient);
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.background svg {
+    width: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container {
+    height: 100%;
+    width: 100%;
+    padding-left: 15%;
+    padding-right: 15%;
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+
+.login-form {
+    font-size: 3vw;
+    display: flex;
+    flex-direction: column;
+    margin-top: 12em;
+    text-align: center;
+    transform: scale(.8)
+}
+
+.signup-form {
+    margin-top: 10.5em;
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.input {
+    font-size: 3vw;
+    padding: 1em;
+    border-radius: 50em;
+    -webkit-border-radius: 50em;
+    -moz-border-radius: 50em;
+    -o-border-radius: 50em;
+    appearance: none;
+    -webkit-appearance: none;
+    margin-bottom: .5em;
+    border: none;
+    color: var(--color-primary);
+    font-weight: bold;
+    background-color: lightgrey;
+}
+
+.input:focus {
+    outline: none;
+}
+
+.input::placeholder {
+    font-weight: 800;
+    color: grey;
+}
+
+input[type='checkbox'] {
+    cursor: pointer;
+    position: absolute;
+    opacity: 0;
+}
+
+footer {
+    margin-top: auto;
+    width: 100%;
+    height: 5vw;
+    background-color: lightgrey;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+}
+
+footer p {
+    color: var(--color-primary);
+    font-size: 2vw;
+}
+
+#login-password {
+    margin-bottom: .5em;
+}
+
+.container-divider {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 1em;
+    font-size: .8em;
+    align-items: center;
+
+}
+
+.container-divider label {
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.container-divider label::before {
+    content: '';
+    display: inline-block;
+    width: .7em;
+    height: .7em;
+    margin-right: .5em;
+    background-color: var(--color-primary);
+
+}
+
+.container-divider label:hover::before,
+.container-divider input[type='checkbox']:hover+label::before {
+    background-color: var(--color-secondary);
+}
+
+.container-divider input[type='checkbox']:checked+label::before {
+    content: '';
+    background-color: var(--color-secondary);
+    justify-content: center;
+    align-items: center;
+    color: var(--color-secondary);
+}
+
+#continue-as-guest {
+    margin-bottom: 5em;
+    font-size: .8em;
+}
+
+#signup-btn {
+    margin-bottom: .2em;
+    margin-top: 2em;
+    background-color: var(--color-secondary);
+    color: white;
+    cursor: pointer;
+}
+
+#back-to-login {
+    margin-bottom: 5em;
+    font-size: .8em;
+    cursor: pointer;
+}
+
+a {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-weight: 800;
+}
+
+h1 {
+    margin-bottom: .5em;
+    color: var(--color-primary);
+}
+
+#login-btn {
+    margin-bottom: .2em;
+    background-color: var(--color-primary);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+#create-account-btn {
+    background-color: var(--color-secondary);
+    color: white;
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.signup-container {
+    overflow-y: scroll;
+    visibility: hidden;
+}
+
+.close {
+    animation-name: closeLogo;
+    animation-duration: 1.7s;
+    animation-fill-mode: forwards;
+}
+
+.open {
+    animation-name: openLogo;
+    animation-duration: 2.3s;
+    animation-fill-mode: forwards;
+}
+
+.transition {
+    animation-name: screenWipe;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.transition-original {
+    animation-name: screenWipeOriginal;
+    animation-duration: 1.5s;
+    animation-fill-mode: forwards;
+}
+
+.background h1,
+p {
+    color: white;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.background h1 {
+    font-size: 4vw;
+}
+
+.background p {
+    font-size: 3vw;
+}
+
+.background-subcontainer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    ;
+}
+
+#lastname {
+    margin-bottom: .2em;
+}
+
+.validation-feedback-error {
+  color: rgb(255, 0, 0);
+  font-size: 2.6vw;
+  padding-bottom: .9em;
+  font-weight: 800;
+}
+
+.invalidated {
+    outline: 3px solid rgb(255, 0, 0);
+    margin-bottom: .5em;
+}
+
+.validated {
+    outline: 3px solid rgb(0, 255, 30);
+    margin-top: .5em;
+}
+
+.invisible {
+    display: none;
+}
+@keyframes screenWipeOriginal {
+    0% {
+        top: 0
+    }
+
+    30% {
+        height: 100vh;
+    }
+
+    60% {
+        height: 100vh;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+@keyframes openLogo {
+    0% {
+        opacity: 0;
+    }
+
+    75% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes closeLogo {
+    0% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes screenWipe {
+    0% {
+        top: 0
+    }
+
+    30% {
+        height: 100vh;
+    }
+
+    60% {
+        height: 100vh;
+    }
+
+    100% {
+        bottom: 0;
+    }
+}
+
+@media screen and (max-height: 539px) and (orientation: landscape) {
+    body {
+        height: 150vw;
+        overflow-y: scroll;
+    }
+
+    .login-container {
+        height: 150vw;
+    }
+
+    @keyframes screenWipeOriginal {
+        0% {
+            top: 0
+        }
+
+        30% {
+            height: 150vw;
+        }
+
+        60% {
+            height: 150vw;
+        }
+
+        100% {
+            bottom: 0;
+        }
+    }
+
+    @keyframes screenWipe {
+        0% {
+            top: 0
+        }
+
+        30% {
+            height: 150vw;
+        }
+
+        60% {
+            height: 150vw;
+        }
+
+        100% {
+            bottom: 0;
+        }
+    }
+
+}
+
+@media screen and (min-width: 768px) and (min-height: 540px) {
+
+    body {
+        overflow: hidden;
+    }
+
+    .login-container {
+        width: 50vw;
+        height: 100vh;
+        padding-left: 10%;
+        padding-right: 10%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .background svg {
+        width: 30vw;
+    }
+
+    .signup-container {
+        left: 50%;
+        visibility: visible;
+        overflow-y: hidden;
+    }
+
+    .background {
+        width: 50vw;
+        height: 100vh;
+        right: 0;
+    }
+
+    .login-form {
+        margin-top: 0;
+        font-size: 1.5vw;
+        transform: scale(1)
+    }
+
+    .signup-form {
+        margin-top: 2em;
+        transform: scale(1)
+    }
+
+    .input {
+        font-size: 1.5vw;
+    }
+
+    footer {
+        height: 2vw;
+    }
+
+    .container-divider {
+        font-size: .7em;
+    }
+
+    #continue-as-guest {
+        font-size: .7em;
+    }
+
+    .background h1 {
+        font-size: 2vw;
+    }
+
+    .background p {
+        font-size: 1.5vw;
+    }
+
+    footer p {
+        color: var(--color-primary);
+        font-size: 1vw;
+    }
+
+    .float-left {
+        margin-left: -50%;
+    }
+
+    .float-right {
+        margin-left: 50%;
+    }
+    .validation-feedback-error {
+        font-size: 1.1vw;
+    }
+
+    @keyframes screenWipe {
+        0% {
+            width: 50vw;
+        }
+
+        30% {
+            width: 100vw;
+        }
+
+        60% {
+            width: 100vw;
+        }
+
+        100% {
+            width: 50vw;
+            left: 0;
+        }
+    }
+
+    @keyframes openLogo {
+        0% {
+            opacity: 0;
+        }
+
+        75% {
+            opacity: 0;
+        }
+
+        100% {
+            opacity: 1;
+        }
+    }
+
+    @keyframes closeLogo {
+        0% {
+            opacity: 1;
+        }
+
+        75% {
+            opacity: 1;
+        }
+
+        100% {
+            opacity: 0;
+        }
+    }
+
+    @keyframes screenWipeOriginal {
+        0% {
+            left: 0;
+            width: 50vw;
+        }
+
+        30% {
+            width: 100vw;
+        }
+
+        60% {
+            width: 100vw;
+        }
+
+        100% {
+            width: 50vw;
+            right: 0;
+        }
+    }
+}
+
+@media screen and (min-width: 1300px) {
+    .login-form {
+        transform: scale(.7)
+    }
+
+    .signup-form {
+        transform: scale(.7)
+    }
+}
+
+@media screen and (min-width: 3400px) and (max-height: 1500px){
+    .login-form {
+        transform: scale(.6);
+    }
+
+    .signup-form {
+        transform: scale(.6)
+    }
+}
