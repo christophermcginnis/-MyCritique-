@@ -1,1 +1,1 @@
-# mycritique.com
+-MyCritique-
