@@ -1,1 +1,0 @@
-# mycritique.com

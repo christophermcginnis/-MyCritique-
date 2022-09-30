@@ -1,67 +1,83 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
-const AppError = require('./appError')
+const AppError = require('./appError');
+const engine = require('ejs-mate');
 const morgan = require('morgan');
+const passport = require('passport');
+const LocalStategy = require('passport-local');
+const session = require('express-session');
+const flash = require('connect-flash');
+const User = require('./models/user')
 
+const loginPage = require('./routes/login');
+const registerPage = require('./routes/register');
+const homePage = require('./routes/home');
+const profilePage = require('./routes/profile');
+const gamesPage = require('./routes/games');
 
 const app = express();
 
+mongoose.connect('mongodb://localhost:27017/mycritique')
+  .then(() => {
+    console.log("Connection Open")
+  })
+
+  .catch(err => {
+    console.log("ERROR:")
+    console.log(err)
+  })
+
+app.engine('ejs', engine);
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
+const sessionConfig = {
+  secret: 'thisshouldbeabettersecret',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000 * 60 * 60 * 24 * 7,
+    maxAge: 1000 * 60 * 60 * 24 * 7
+  }
+}
+app.use(session(sessionConfig))
+app.use(flash())
+passport.use(new LocalStategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use(morgan('tiny'));
 app.use(express.urlencoded({ extended: true}));
 
-const validateRegistration = (req, res, next) => {
-  const {email, username, password, confirmedPassword, firstname, lastname} = req.body;
-  const emailExp = new RegExp('^([a-zA-Z0-9_\\-\\.]+)@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.)|(([a-zA-Z0-9\\-]+\\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\\]?)$');
-  const usernameExp = new RegExp('^(?=[a-zA-Z0-9_]{3,15}$)(?!.*[_]{2})[^_].*[^_]$');
-  const passwordExp = new RegExp(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$`)
-  const nameExp = new RegExp("^([^ \\x21-\\x26\\x28-\\x2C\\x2E-\\x40\\x5B-\\x60\\x7B-\\xAC\\xAE-\\xBF\\xF7\\xFE]+)$")
-  const error = [];
-  if(!emailExp.test(email)){
-    error.push(" Email is not in valid format");
-  }
-  if(!usernameExp.test(username)){
-    error.push(" Username is not in valid format");
-  }
-  if(!passwordExp.test(password)){
-    error.push(" Password is not in valid format");
-  }
-  if(password != confirmedPassword){
-    error.push(" Passwords must match");
-  }
-  if(!nameExp.test(firstname)){
-    error.push(" First name is not in valid format");
-  }
-  if(!nameExp.test(lastname)){
-    error.push("Last name is not in valid format");
-  }
-  if(error.length > 0){
-    throw new AppError(error, 401)
-  }
+app.use('/login', express.static('public'))
+app.use('/register', express.static('public'))
+app.use('/home', express.static('public'))
+app.use('/games', express.static('public'))
+app.use('/profile', express.static('public'))
+ 
+app.use((req, res, next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
   next();
-  }
-
-app.use('/login', express.static('public'));
-app.get('/login', (req, res) => {
-  res.render('login')
 })
 
-app.post('/register', validateRegistration, (req,res) => {
-  res.redirect('login');
-})
+app.use('/login', loginPage)
+app.use('/register', registerPage)
+app.use('/home', homePage)
+app.use('/profile', profilePage)
+app.use('/games', gamesPage)
 
-app.get('/home', (req, res) => {
-  res.render('home')
+app.use((req, res, next) => {
+  throw new AppError("Error 404 NOT FOUND", 404)
 })
 
 app.use((err, req, res, next) => {
-  const { status = 500, message = "Something went wrong."} = err;
-  res.status(status).send(message);
+  const { status = 500, message = "Something went wrong.", type = "Standard"} = err;
+  res.status(status,).send(message);
+  next(err);
 })
-  
+
 app.listen(3000, () => {
   console.log("Server listening on port: 3000")
 })
