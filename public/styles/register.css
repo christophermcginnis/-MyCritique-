@@ -307,7 +307,6 @@ p {
 .validation-feedback-error {
   color: rgb(255, 0, 0);
   font-size: 2.6vw;
-  padding-top: .45em;
   padding-bottom: .9em;
   font-weight: 800;
 }
@@ -587,6 +586,7 @@ p {
             right: 0;
         }
     }
+
 }
 
 @media screen and (min-width: 1300px) {

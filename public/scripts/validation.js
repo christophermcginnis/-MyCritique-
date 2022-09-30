@@ -1,71 +1,3 @@
-const createAccount = document.getElementById('create-account-btn');
-const logo = document.getElementById('logo');
-const logoContainer = document.querySelector('.background');
-const loginForm = document.querySelector('.login-container');
-const signupForm = document.querySelector('.signup-container');
-const logoHeading = document.querySelector('.background-subcontainer');
-const backToLogin = document.getElementById('back-to-login');
-const footerContent = document.getElementById('footer-content');
-const signUp = document.getElementById('signup-btn');
-
-// Lets user cycle between "Log in" and "Sign up" forms
-footerContent.classList.add('float-left');
-
-createAccount.addEventListener("click", function(e) {
-  e.preventDefault;
-  
-  // -> removing the class
-  footerContent.classList.remove('float-left');
-  footerContent.classList.remove('float-right');
-    logoContainer.classList.remove("transition");
-    logoContainer.classList.remove("transition-original");
-    logo.classList.remove('close');
-    logo.classList.remove('open');
-    logoHeading.classList.remove('open');
-    logoHeading.classList.remove('close');
-
-  void logoContainer.offsetWidth;
-  
-  // -> and re-adding the class
-  footerContent.classList.add('float-right');
-    logoContainer.classList.add("transition");
-    logo.classList.add('close');
-    logoHeading.classList.add('open');
-    setTimeout(() => {
-        loginForm.style = "visibility: hidden;"
-        signupForm.style = "visibility: visible;"
-    }, 500)
-  
-}, false);
-
-backToLogin.addEventListener("click", function(e) {
-  e.preventDefault;
-  
-  // -> removing the class
-  footerContent.classList.remove('float-left');
-  footerContent.classList.remove('float-right');
-    logoContainer.classList.remove("transition");
-    logoContainer.classList.remove("transition-original");
-    logo.classList.remove('close');
-    logo.classList.remove('open');
-    logoHeading.classList.remove('open');
-    logoHeading.classList.remove('close');
-  
-  void logoContainer.offsetWidth;
-  
-  // -> and re-adding the class
-  footerContent.classList.add('float-left');
-    logoContainer.classList.add('close')
-    logoContainer.classList.add('open');
-    logoContainer.classList.add("transition");
-    logoContainer.classList.add("transition-original");
-    
-    setTimeout(() => {
-        loginForm.style = "visibility: visible;"
-        signupForm.style = "visibility: hidden;"
-    }, 500);
-}, false);
-
 // Validates users credentials
 const input = document.querySelectorAll('.input');
 const feedbackContainer = document.querySelectorAll('.validation-feedback');
@@ -97,10 +29,18 @@ function Validator(input, expression, inputArrayNumber) {
   }
   if(expression.test(input.value)){
     input.classList.add('validated');
+    feedbackError[inputArrayNumber].innerText = '';
   }else {
     feedbackContainer[inputArrayNumber].classList.remove('invisible')
     feedbackError[inputArrayNumber].innerText = `${input.getAttribute('placeholder')} must be in valid format.`
     input.classList.add('invalidated');
+  }
+}
+
+function IsEmpty(input, errorArray, e){
+  if(input.value == ''){
+    feedbackError[errorArray].innerText = 'Field is required.'
+    e.preventDefault()
   }
 }
 
@@ -117,7 +57,7 @@ username.addEventListener("input", () => {
     feedbackError[3].innerText = "Username cannot use underscores this way."
   }
   if(username.value.length < 3 && username.value.length > 0){
-    feedbackError[3].innerText = "Password must be at least 3 characters in length."
+    feedbackError[3].innerText = "Username must be at least 3 characters in length."
   }
 })
 
@@ -138,9 +78,6 @@ password.addEventListener("input", () => {
   if(RegExp('[0-9]').test(password.value) == false){
     feedbackError[4].innerText = "Password must contain a number."
   }
-  if(password.value != confirmPassword.value){
-    feedbackError[5].innerText = "Passwords must match."
-  }
   if(password.value == ''){
     feedbackContainer[4].classList.remove('invisible');
     feedbackError[4].innerText = 'Field is required.';
@@ -148,9 +85,25 @@ password.addEventListener("input", () => {
 })
 
 confirmPassword.addEventListener('input', () => {
-  Validator(confirmPassword, passwordRegExp, 5);
+  if(confirmPassword.value != password.value){
+    feedbackContainer[5].classList.remove('invisible')
+    feedbackError[5].innerText = "Passwords must match.";
+   }
+   else{
+    feedbackError[5].innerText = "";
+    feedbackContainer[5].classList.add('invisible')
+   }
+})
+
+confirmPassword.addEventListener('focusout', () => {
   if(confirmPassword.value != password.value){
     feedbackError[5].innerText = "Passwords must match.";
+    feedbackContainer[5].classList.remove('invisible')
+    confirmPassword.classList.add('invalidated')
+   }else{
+    feedbackError[5].innerText = "";
+    feedbackContainer[5].classList.add('invisible')
+    confirmPassword.classList.add('validated')
    }
 })
 
@@ -175,6 +128,16 @@ lastName.addEventListener('input', () => {
 })
 
 signupBtn.addEventListener('click', (e) => {
-  
-})
+    feedbackError.forEach((element) => {
+      if(element.innerText != ''){
+       e.preventDefault();
+      }
+    })
 
+    IsEmpty(email, 2, e)
+    IsEmpty(username, 3, e)
+    IsEmpty(password, 4, e)
+    IsEmpty(confirmPassword, 5, e)
+    IsEmpty(firstName, 6, e)
+    IsEmpty(lastName, 7, e)
+})
