@@ -1,21 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const AppError = require('../appError');
-const passport = require('passport');
 
-router.get('/', (req, res) => {
-  res.render('login')
-})
-
-router.post('/', passport.authenticate('local', { failureFlash: true, failureRedirect: '/login'}), (req, res) => {
-  const redirectUrl = req.session.returnTo || '/home'
-  res.redirect(redirectUrl)
-})
-
-router.get('/logout', (req, res, next) => {
-  req.logout();
-  res.redirect('/login')
-})
+router.get('/', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      req.flash('success', 'Logout Successful')
+      res.redirect('/login');
+    });
+  });
 
 router.use((req, res, next) => {
     throw new AppError("Error 404 NOT FOUND", 404)

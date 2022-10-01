@@ -4,7 +4,7 @@ const AppError = require('../appError');
 
 
 router.get('/', (req, res) => {
-    currentPage = 'Home'
+    currentPage = 'Games'
     res.render('games', {page: currentPage})
   })
   

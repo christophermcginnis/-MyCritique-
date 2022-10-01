@@ -30,9 +30,9 @@
 
 :root {
     font-size: 16px;
-    --color-primary: #7e26d1;
-    --color-primary-light: #8f38e0;
-    --color-secondary: #d62759;
+    --color-primary: #455073;
+    --color-primary-light: #5e688b;
+    --color-secondary: #efc9af;
     --color-secondary-light: #e73a6b;
     --color-grey: #E8E8E8;
     --color-grey-dark: #cac8c8;
@@ -94,10 +94,15 @@ body {
     appearance: none;
     -webkit-appearance: none;
     border: none;
-    color: black;
+    color: white;
     font-weight: bold;
     background-color: var(--color-primary-light);
     position: relative;
+}
+
+#site-search:focus {
+    outline: none;
+    border: 2px solid white;
 }
 
 #site-search::placeholder {
@@ -136,6 +141,31 @@ body {
     list-style: none;
     display: flex;
     gap: .5em;
+}
+
+.bar-btn {
+    height: 100%;
+    width: auto;
+    background-color: var(--color-secondary);
+    padding: 0 2em;
+    border-radius: 3em;
+    -webkit-border-radius: 3em;
+    -moz-border-radius: 3em;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.bar-btn a {
+    color: white;
+    font-weight: 800;
+    font-size: 2vw;
+    white-space: nowrap;
+    transform: scale();
+}
+
+.btn-create-account {
+    background-color: var(--color-accent)
 }
 
 .notification-bar-icon {
@@ -354,6 +384,11 @@ gap: 1em;
     font-size: 1.3rem;
 }
 
+.home-hero {
+    
+}
+ /* HOMEPAGE */
+
 /* POPUP - PROFILE */
 .popup-profile {
     position: absolute;
@@ -560,7 +595,7 @@ justify-content: space-between;
     max-width: 500px;
     height: auto;
     max-height: 90vh;
-    background-color: var(--color-primary-light);
+    background-color: var(--color-primary);
     z-index: 3;
     top: -100%;
     border-radius: .5em;
@@ -653,6 +688,15 @@ justify-content: space-between;
        /* HOMEPAGE */
   .page-h1 {
     font-size: .9rem;
+    
+}
+/* Styles login and create account buttons when not logged in */
+.bar-btn a {
+    color: white;
+    font-weight: 800;
+    font-size: 2vw;
+    white-space: nowrap;
+    transform: scale(1.7);
 }
 }
 
@@ -727,6 +771,12 @@ justify-content: space-between;
             right: -38em;
         }
     }
+
+    .bar-btn a {
+
+        font-size: 1rem;
+
+    }
     
 }
 
@@ -748,13 +798,17 @@ justify-content: space-between;
         display: none;
     }
 
+    .notification-bar {
+        position: relative;;
+    }
+
     /* Styles seatch bar */
     #site-search {
-        width : 100%;
+        width : 80%;
         height: 100%;
         border-radius: 3em;
         padding: 1em;
-        padding-left: 3em;
+        padding-left: 3.5em;
         border-radius: 50em;
         -webkit-border-radius: 50em;
         -moz-border-radius: 50em;
@@ -762,7 +816,6 @@ justify-content: space-between;
         appearance: none;
         -webkit-appearance: none;
         border: none;
-        color: black;
         font-weight: bold;
         background-color: var(--color-primary-light);
         }
@@ -774,9 +827,8 @@ justify-content: space-between;
     /* Displays desktop search bar */
     #notification-bar-search {
         display: initial;
-        width: 500px;
+        width: 590px;
         position: relative;
-        margin-left: 40px;
     }
 
     /* Styles search icon */
@@ -944,7 +996,8 @@ justify-content: space-between;
 }
 
 .popup-search {
-    width: 500px;
+    max-width: 600px;
+    left: 18.7em;;
 }
 
 .slideleft {
@@ -973,6 +1026,12 @@ justify-content: space-between;
     100% {
         right: -38em;
     }
+}
+
+
+/* Home Page */
+.home-hero {
+
 }
 }
 

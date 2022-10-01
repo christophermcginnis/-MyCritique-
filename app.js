@@ -15,6 +15,7 @@ const registerPage = require('./routes/register');
 const homePage = require('./routes/home');
 const profilePage = require('./routes/profile');
 const gamesPage = require('./routes/games');
+const logoutPage = require('./routes/logout');
 
 const app = express();
 
@@ -43,6 +44,8 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 app.use(flash())
+app.use(passport.initialize());
+app.use(passport.session())
 passport.use(new LocalStategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
@@ -59,9 +62,11 @@ app.use('/profile', express.static('public'))
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
+  res.locals.user = req.user;
   next();
 })
 
+app.use('/logout', logoutPage)
 app.use('/login', loginPage)
 app.use('/register', registerPage)
 app.use('/home', homePage)

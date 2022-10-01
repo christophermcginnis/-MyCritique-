@@ -10,6 +10,7 @@
 <body>
 
     <nav class="nav notification-bar">
+        <div style="display: flex;"">
         <a tabindex="1" href="/home">
         <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 915.12 348.96">
                 <path
@@ -65,8 +66,10 @@
                 </svg>
             </span>
         </form>
-
+        </div>
         <ul class="notification-bar-icons">
+
+
             <li>
                
                     <div tabindex="1" class="home-icon notification-bar-icon search" style="background-color: var(--color-primary-light)">
@@ -79,6 +82,10 @@
                     </div>
                
             </li>
+            <% if(!user) { %> 
+            <li class="bar-btn btn-login"><a href="/login">Log in</a></li>
+            <li class="bar-btn btn-create-account"><a href="/register" >Create new account</a></li>
+            <% } else { %> 
             <li>
                 
                     <div tabindex="2" class="home-icon notification-bar-icon messages">
@@ -97,6 +104,7 @@
                     </div>
                 
             </li>
+
             <li>
                 
                     <div tabindex="3" class="home-icon notification-bar-icon notifications">
@@ -110,6 +118,7 @@
                       </div>
                 
             </li>
+
             <li>
                 
                     <div tabindex="4" class="home-icon notification-bar-icon user">
@@ -123,9 +132,11 @@
                     </div>
                 
             </li>
+            <% } %> 
         </ul>
+       
     </nav>
-
+    
     <nav class="nav navigation-bar">
         
         <ul class="navigation-bar-icons">
@@ -207,6 +218,10 @@
         </ul>
     </nav>
 
+
+    <% if (!user) { %> 
+    <% void(0) %> 
+    <% } else {%> 
     <div class="popup-profile">
         <div class="popup-profile-heading-container-outer">
             <div style="display: flex; gap: 1em;">
@@ -286,5 +301,6 @@
             <h3>Recently Searched</h3>
         </div>
     </div>
-
+    <% } %> 
+    
     

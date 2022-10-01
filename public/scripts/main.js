@@ -16,141 +16,200 @@ navBar[1].addEventListener('click', (e) =>
 /* Controls Profile popup */
 const Userbtn = document.querySelector('.user');
 const profilePopup = document.querySelector('.popup-profile');
+const logoutBtn = document.getElementById('logout-btn')
+usertoggle = false;
+
+if(Userbtn == null){
+    void(0)
+}else{
 
 Userbtn.addEventListener('click', (e) => {
+    e.stopPropagation()
+    e.preventDefault;
+
+    if(usertoggle == false){
+        usertoggle = true;
+    }else if (usertoggle == true){
+        usertoggle = false;
+    }
+    console.log(usertoggle)
+    
+    if(usertoggle == true){
+        profilePopup.classList.remove('slideleft')
+        profilePopup.classList.remove('slideright')
+
+        void window.offsetWWidth
+
+        profilePopup.classList.add('slideleft');
+    }else{
+        profilePopup.classList.remove('slideleft')
+        profilePopup.classList.remove('slideright')
+
+        void window.offsetWWidth
+        profilePopup.classList.add('slideright');
+    }
+
+
+})
+
+Userbtn.addEventListener('focus', (e) => {
     e.stopPropagation()
     e.preventDefault;
     if(notificationsPopup.classList.contains('slideleft')){
         notificationsPopup.classList.remove('slideleft')
         notificationsPopup.classList.add('slideright')
+        notificationstoggle = false
     }
-    else if (messagesPopup.classList.contains('slideleft')){
+    else if(messagesPopup.classList.contains('slideleft')){
         messagesPopup.classList.remove('slideleft')
         messagesPopup.classList.add('slideright')
+        messagestoggle = false
     }
-
-    if(profilePopup.classList.contains('slideright')){
-    profilePopup.classList.remove('slideleft')
     profilePopup.classList.remove('slideright')
+    profilePopup.classList.remove('slideleft')
 
-    void window.offsetWWidth;
+    void window.offsetWWidth
 
     profilePopup.classList.add('slideleft')
-    }
-    else if(profilePopup.classList.contains('slideleft')){
-        profilePopup.classList.remove('slideleft')
-        profilePopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        profilePopup.classList.add('slideright')
-    }
-    else {
-        profilePopup.classList.remove('slideleft')
-        profilePopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        profilePopup.classList.add('slideleft')
-        }
-    
 
 })
 
+logoutBtn.addEventListener('focusout', (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    profilePopup.classList.remove('slideleft')
+    profilePopup.classList.remove('slideright')
+
+    void window.offsetWWidth
+
+    profilePopup.classList.add('slideright')
+})
+}
 /* Controls Notifications popup */
 const notificationsBtn = document.querySelector('.notifications');
 const notificationsPopup = document.querySelector('.popup-notifications');
+notificationstoggle = false
+
+if(notificationsBtn == null){
+    void(0)
+}
+    
+else {
 
 notificationsBtn.addEventListener('click', (e) => {
-    console.log('working')
+    e.stopPropagation()
+    e.preventDefault;
+    if(notificationstoggle == false){
+        notificationstoggle = true;
+    }else if (notificationstoggle == true){
+        notificationstoggle = false;
+    }
+    console.log(notificationstoggle)
+    
+    if(notificationstoggle == true){
+        notificationsPopup.classList.remove('slideleft')
+        notificationsPopup.classList.remove('slideright')
+
+        void window.offsetWWidth
+
+        notificationsPopup.classList.add('slideleft');
+    }else{
+        notificationsPopup.classList.remove('slideleft')
+        notificationsPopup.classList.remove('slideright')
+
+        void window.offsetWWidth
+        notificationsPopup.classList.add('slideright');
+    }
+
+})
+
+notificationsBtn.addEventListener('focus', (e) => {
     e.stopPropagation()
     e.preventDefault;
     if(profilePopup.classList.contains('slideleft')){
         profilePopup.classList.remove('slideleft')
         profilePopup.classList.add('slideright')
+        usertoggle = false
     }
-    else if (messagesPopup.classList.contains('slideleft')){
+    else if(messagesPopup.classList.contains('slideleft')){
         messagesPopup.classList.remove('slideleft')
         messagesPopup.classList.add('slideright')
+        messagestoggle = false
     }
-
-    if(notificationsPopup.classList.contains('slideright')){
-    notificationsPopup.classList.remove('slideleft')
     notificationsPopup.classList.remove('slideright')
+    notificationsPopup.classList.remove('slideleft')
 
-    void window.offsetWWidth;
+    void window.offsetWWidth
 
     notificationsPopup.classList.add('slideleft')
-    }
-    else if(notificationsPopup.classList.contains('slideleft')){
-        notificationsPopup.classList.remove('slideleft')
-        notificationsPopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        notificationsPopup.classList.add('slideright')
-    }
-    else {
-        notificationsPopup.classList.remove('slideleft')
-        notificationsPopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        notificationsPopup.classList.add('slideleft')
-        }
-    
 
 })
+}
 
 /* Controls Messages popup */
 const messagesBtn = document.querySelector('.messages');
 const messagesPopup = document.querySelector('.popup-messages');
+messagestoggle = false
 
+if(messagesBtn == null) {
+    void(0)
+}else {
 
 messagesBtn.addEventListener('click', (e) => {
     console.log('working')
     e.stopPropagation()
     e.preventDefault;
-    if(profilePopup.classList.contains('slideleft')){
-        profilePopup.classList.remove('slideleft')
-        profilePopup.classList.add('slideright')
+    if(messagestoggle == false){
+        messagestoggle = true;
+    }else if (messagestoggle == true){
+        messagestoggle = false;
     }
-    else if (notificationsPopup.classList.contains('slideleft')){
-        notificationsPopup.classList.remove('slideleft')
-        notificationsPopup.classList.add('slideright')
-    }
-
-    if(messagesPopup.classList.contains('slideright')){
-    messagesPopup.classList.remove('slideleft')
-    messagesPopup.classList.remove('slideright')
-
-    void window.offsetWWidth;
-
-    messagesPopup.classList.add('slideleft')
-    }
-    else if(messagesPopup.classList.contains('slideleft')){
+    console.log(messagestoggle)
+    
+    if(messagestoggle == true){
         messagesPopup.classList.remove('slideleft')
         messagesPopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        messagesPopup.classList.add('slideright')
-    }
-    else {
+
+        void window.offsetWWidth
+
+        messagesPopup.classList.add('slideleft');
+    }else{
         messagesPopup.classList.remove('slideleft')
         messagesPopup.classList.remove('slideright')
-    
-        void window.offsetWWidth;
-    
-        messagesPopup.classList.add('slideleft')
-        }
-    
+
+        void window.offsetWWidth
+        messagesPopup.classList.add('slideright');
+    }
 
 })
 
+messagesBtn.addEventListener('focus', (e) => {
+    e.stopPropagation()
+    e.preventDefault;
+    if(profilePopup.classList.contains('slideleft')){
+        profilePopup.classList.remove('slideleft')
+        profilePopup.classList.add('slideright')
+        usertoggle = false
+    }
+    else if(notificationsPopup.classList.contains('slideleft')){
+        notificationsPopup.classList.remove('slideleft')
+        notificationsPopup.classList.add('slideright')
+        notificationstoggle = false
+    }
+    messagesPopup.classList.remove('slideright')
+    messagesPopup.classList.remove('slideleft')
+
+    void window.offsetWWidth
+
+    messagesPopup.classList.add('slideleft')
+
+})
+
+}
+
 /* Closes PopUp */
 /* Only declared here for scope */
-const recentSearches = document.querySelector('.popup-search');
+
 window.addEventListener('click', (e) => {
     
     if(navBar[1].classList.contains('transition-slide-down')){
@@ -183,6 +242,9 @@ const icons = document.querySelectorAll('.home-icon')
 const searchBar = document.getElementById('notification-bar-search')
 const closeSearch = document.getElementById('close-search')
 const searchBtn = document.getElementById('site-search');
+const recentSearches = document.querySelector('.popup-search');
+const btns = document.querySelectorAll('.bar-btn');
+searchtoggle = false
 
 searchBtnMobile.addEventListener('click', () => {
     logo.style = 'display: none;';
@@ -191,6 +253,17 @@ searchBtnMobile.addEventListener('click', () => {
     })
     searchBar.style = " display: initial"
     searchBar.classList.add('visible')
+
+    if(searchtoggle == false){
+        searchtoggle = true;
+    }else if (searchtoggle == true){
+        searchtoggle = false;
+    }
+
+        btns.forEach((e) => {
+            e.style = "visibility: hidden;"
+        })
+    
 })
 
 var width,height;
@@ -226,12 +299,46 @@ closeSearch.addEventListener('click', () => {
     })
     searchBar.style = " display: none"
     searchBar.classList.remove('visible')
+
+    btns.forEach((e) => {
+        e.style = "visibility: visible;"
+    })
 })
 
 searchBtn.addEventListener('input', (e) => {
     e.stopPropagation();
     recentSearches.classList.remove('slideup')
     recentSearches.classList.add('slidedown')
+})
+
+/* Controls navigations bar focusing */
+const homeIcon = document.querySelector('.home');
+const moviesIcon = document.querySelector('.movies');
+
+homeIcon.addEventListener('focus', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    navBar[1].classList.remove('transition-slide-up')
+    navBar[1].classList.remove('transition-slide-down')
+
+    void window.offsetWWidth;
+
+    navBar[1].classList.add('transition-slide-down')
+
+})
+
+moviesIcon.addEventListener('focusout', (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+
+    navBar[1].classList.remove('transition-slide-up')
+    navBar[1].classList.remove('transition-slide-down')
+
+    void window.offsetWWidth;
+
+    navBar[1].classList.add('transition-slide-up')
+
 })
 
 
