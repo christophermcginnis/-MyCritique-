@@ -16,8 +16,16 @@ const homePage = require('./routes/home');
 const profilePage = require('./routes/profile');
 const gamesPage = require('./routes/games');
 const logoutPage = require('./routes/logout');
+const searchPage = require('./routes/search');
+
+const { json } = require('express');
 
 const app = express();
+
+// Listen on a specific port via the PORT environment variable
+const port = 8080;
+const cors_proxy = require('cors-anywhere');
+
 
 mongoose.connect('mongodb://localhost:27017/mycritique')
   .then(() => {
@@ -42,6 +50,7 @@ const sessionConfig = {
     maxAge: 1000 * 60 * 60 * 24 * 7
   }
 }
+
 app.use(session(sessionConfig))
 app.use(flash())
 app.use(passport.initialize());
@@ -58,6 +67,10 @@ app.use('/register', express.static('public'))
 app.use('/home', express.static('public'))
 app.use('/games', express.static('public'))
 app.use('/profile', express.static('public'))
+app.use('/games', express.static('public'))
+app.use('/games/game', express.static('public'))
+app.use('/search', express.static('public'))
+
  
 app.use((req, res, next) => {
   res.locals.success = req.flash('success');
@@ -72,6 +85,8 @@ app.use('/register', registerPage)
 app.use('/home', homePage)
 app.use('/profile', profilePage)
 app.use('/games', gamesPage)
+app.use('/search', searchPage)
+
 
 app.use((req, res, next) => {
   throw new AppError("Error 404 NOT FOUND", 404)
@@ -82,6 +97,14 @@ app.use((err, req, res, next) => {
   res.status(status,).send(message);
   next(err);
 })
+
+cors_proxy.createServer({
+  originWhitelist: ['http://localhost:3000'], // Allow all origins
+  requireHeader: ['origin', 'x-requested-with', 'SameSite=None'],
+  removeHeaders: ['cookie', 'cookie2']
+}).listen(port, function() {
+  console.log('Running CORS Anywhere on port: 8080');
+});
 
 app.listen(3000, () => {
   console.log("Server listening on port: 3000")

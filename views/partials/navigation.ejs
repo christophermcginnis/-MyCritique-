@@ -7,10 +7,10 @@
     <link rel="stylesheet" href="styles/main.css">
     <title>My Critique | <%= page %></title>
 </head>
-<body>
+<body id="page-content">
 
     <nav class="nav notification-bar">
-        <div style="display: flex;"">
+        <div style="display: flex;">
         <a tabindex="1" href="/home">
         <svg id="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 915.12 348.96">
                 <path
@@ -46,7 +46,7 @@
                     style="fill:#fff;stroke:#fff;stroke-miterlimit:10;stroke-width:1.89959511004421px" />
         </svg>
         </a>
-        <form id="notification-bar-search" action="#">
+        <form id="notification-bar-search" action="/search" method="GET">
             <label class="visually-hidden" for="site-search">Search:</label>
             <input type="search" id="site-search" name="q" placeholder="Search...">
             <div id="close-search">
@@ -83,8 +83,8 @@
                
             </li>
             <% if(!user) { %> 
-            <li class="bar-btn btn-login"><a href="/login">Log in</a></li>
-            <li class="bar-btn btn-create-account"><a href="/register" >Create new account</a></li>
+            <li class="nav-btn"><a href="/login"><button id="login-btn-nav">Login</button></a></li>
+            <li class ="nav-btn"><a href="/register"><button id="create-acct-btn-nav">Sign up</button></a></li>
             <% } else { %> 
             <li>
                 
@@ -100,7 +100,7 @@
                             </g>
                             </g>
                         </svg>
-                        <div class="notification"><p>1</p></div>
+                        <div style="visibility: hidden;" class="notification"><p>1</p></div>
                     </div>
                 
             </li>
@@ -114,7 +114,7 @@
                             <path class="cls-1" d="M32.66,33.48c0,.4-.16,.76-.42,1.01-.26,.26-.61,.41-1,.41H1.43c-.39,0-.75-.16-1-.41-.26-.26-.42-.61-.42-1.01,0-2.05,1.25-3.82,3.04-4.56,.26-.11,.42-.38,.42-.66v-10.34c0-6.07,4.21-11.16,9.86-12.51V3.13C13.33,1.57,14.47,.17,16.02,.01c1.79-.18,3.3,1.22,3.3,2.98v2.4c5.66,1.35,9.86,6.44,9.86,12.51v10.34c0,.28,.16,.56,.42,.66,1.79,.74,3.04,2.51,3.04,4.56Zm-11.36,3.97h0s-9.93,0-9.93,0h0c0,2.72,2.2,4.92,4.92,4.92h.09c2.72,0,4.92-2.2,4.92-4.92Z"/>
                             </g>
                         </svg>
-                        <div class="notification"><p>1</p></div>
+                        <div style="visibility: hidden;" class="notification"><p>1</p></div>
                       </div>
                 
             </li>
@@ -220,7 +220,7 @@
 
 
     <% if (!user) { %> 
-    <% void(0) %> 
+    <% void[0] %>
     <% } else {%> 
     <div class="popup-profile">
         <div class="popup-profile-heading-container-outer">
@@ -235,8 +235,8 @@
                 </div>
 
                 <div style="margin-top: .2em;">
-                <h3>Gabe McGinnis</h3>
-                <p>@chrisMF</p>
+                <h3><%-`${user.firstname} ${user.lastname}`%></h3>
+                <p><%- `@${user.username}`%></p>
                 </div>
                 </div>
                 <a tabindex="4" id="view-profile-btn" href="/profile"><h3>View my profile</h3></a>
@@ -292,7 +292,7 @@
             </div>
  
     </div>
-
+    <% } %> 
     <div class="popup-search">
         <div class="search-menu-item" style="display: flex; gap: 1em;">
         </div>
@@ -301,6 +301,6 @@
             <h3>Recently Searched</h3>
         </div>
     </div>
-    <% } %> 
+
     
     

@@ -6,7 +6,7 @@ class AppError extends Error {
     }
 
     if(message = 'E11000 duplicate key error collection: mycritique.users index: email_1 dup key: { email: "chris_mcginnis@icloud.com" }'){
-        this.message = "We're srry that email address is already taken."
+        this.message = "We're sorry that email address is already taken."
     }
 }
 

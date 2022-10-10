@@ -207,34 +207,6 @@ messagesBtn.addEventListener('focus', (e) => {
 
 }
 
-/* Closes PopUp */
-/* Only declared here for scope */
-
-window.addEventListener('click', (e) => {
-    
-    if(navBar[1].classList.contains('transition-slide-down')){
-        navBar[1].classList.remove('transition-slide-down')
-        navBar[1].classList.add('transition-slide-up')
-    }
-
-    if(profilePopup.classList.contains('slideleft')){
-        profilePopup.classList.remove('slideleft')
-        profilePopup.classList.add('slideright')
-    }
-    else if (notificationsPopup.classList.contains('slideleft')){
-        notificationsPopup.classList.remove('slideleft')
-        notificationsPopup.classList.add('slideright')
-    }
-    else if (messagesPopup.classList.contains('slideleft')){
-        messagesPopup.classList.remove('slideleft')
-        messagesPopup.classList.add('slideright')
-    }
-    else if (recentSearches.classList.contains('slidedown')){
-        recentSearches.classList.remove('slidedown')
-        recentSearches.classList.add('slideup')
-    }
-})
-
 /* Search Popup */
 const searchBtnMobile = document.querySelector('.search');
 const logo = document.getElementById('logo')
@@ -244,6 +216,7 @@ const closeSearch = document.getElementById('close-search')
 const searchBtn = document.getElementById('site-search');
 const recentSearches = document.querySelector('.popup-search');
 const btns = document.querySelectorAll('.bar-btn');
+const login_signup_btns = document.querySelectorAll('.nav-btn')
 searchtoggle = false
 
 searchBtnMobile.addEventListener('click', () => {
@@ -251,6 +224,11 @@ searchBtnMobile.addEventListener('click', () => {
     icons.forEach((e) => {
         e.style = "display: none;"
     })
+
+    login_signup_btns.forEach((e) => {
+        e.style = "display: none;"
+    })
+    
     searchBar.style = " display: initial"
     searchBar.classList.add('visible')
 
@@ -297,6 +275,10 @@ closeSearch.addEventListener('click', () => {
     icons.forEach((e) => {
         e.style = "display: '';"
     })
+
+    login_signup_btns.forEach((e) => {
+        e.style = "display: '';"
+    })
     searchBar.style = " display: none"
     searchBar.classList.remove('visible')
 
@@ -306,10 +288,20 @@ closeSearch.addEventListener('click', () => {
 })
 
 searchBtn.addEventListener('input', (e) => {
-    e.stopPropagation();
+    /*
     recentSearches.classList.remove('slideup')
     recentSearches.classList.add('slidedown')
+    if (searchBtn.value == ''){
+        recentSearches.classList.remove('slidedown')
+        recentSearches.classList.add('slideup')
+    }
+    */
 })
+
+searchBar.addEventListener('submit', (e) => {
+    console.log(searchBtn.value)
+})
+
 
 /* Controls navigations bar focusing */
 const homeIcon = document.querySelector('.home');
@@ -341,5 +333,47 @@ moviesIcon.addEventListener('focusout', (e) => {
 
 })
 
+/* Closes PopUp */
+/* Only declared here for scope */
+
+window.addEventListener('click', (e) => {
+    if(navBar[1].classList.contains('transition-slide-down')){
+        navBar[1].classList.remove('transition-slide-down')
+        navBar[1].classList.add('transition-slide-up')
+    }
+
+    if(profilePopup === null){
+        return
+    }
+
+    if (notificationsPopup === null){
+        return
+    }
+
+    if(messagesPopup === null) {
+        return
+    }
+
+    if(profilePopup.classList.contains('slideleft')){
+        profilePopup.classList.remove('slideleft')
+        profilePopup.classList.add('slideright')
+        usertoggle = false
+    }
+    else if (notificationsPopup.classList.contains('slideleft')){
+        notificationsPopup.classList.remove('slideleft')
+        notificationsPopup.classList.add('slideright')
+        notificationstoggle = false
+    }
+    else if (messagesPopup.classList.contains('slideleft')){
+        messagesPopup.classList.remove('slideleft')
+        messagesPopup.classList.add('slideright')
+        messagestoggle = false
+    }
+    else if (recentSearches.classList.contains('slidedown')){
+        recentSearches.classList.remove('slidedown')
+        recentSearches.classList.add('slideup')
+    }
+
+})
 
 
