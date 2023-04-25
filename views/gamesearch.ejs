@@ -1,0 +1,29 @@
+<%- include('partials/navigation') %>
+<div class="main-content">
+    <div class="result-container">
+        <p>Results: "<%-searchQ%>"</p>
+        <ul>
+            <li><p>1 / 1</p></li>
+            <li><div class="next-page-container">
+                <?xml version="1.0" encoding="UTF-8"?>
+                <svg id="search-arrow"xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.2 46.01">
+                <g>
+                 <polygon class="cls-1" points="7.2 0 0 7.2 15.8 23 0 38.81 7.2 46.01 30.2 23 7.2 0"/>
+                </g>
+                </svg>
+            </div></li>
+        </ul>
+    </div>
+    <div class="results">
+        <%image_covers.forEach((e) => {%>
+       <a href="/games/<%-e.id%>"> <div class="result-item">
+            <div style="background-image: url(<%-e.gameLogo%>); background-position: center; background-size: cover;" class="result-cover">
+            <p><%-e.name%></p>
+            </div>
+        </div>
+    </a>
+        <%})%>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<%- include('partials/footer') %>

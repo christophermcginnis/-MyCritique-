@@ -1,9 +1,0 @@
-<%- include('partials/navigation') %>
-<div class="search-content">
-   <% image_covers.forEach((element) => { %>
-    <div><a href='/games/<%-element.id%>'><img src=<%-element.gameLogo %> alt=""></a></div>
-   <%})%>
-
-</div>
-<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<%- include('partials/footer') %>

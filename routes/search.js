@@ -5,22 +5,24 @@ const axios = require('axios');
 const regexp = require('cors-anywhere/lib/regexp-top-level-domain');
 
 
-router.get('', (request, response) => {
+router.get('/games', (request, response) => {
     const duplicateRegExp = new RegExp('^(/--)$')
     currentPage = 'Search'
     const search_query = request.query.q
-    const config = {headers: {Accept: 'application/json', 'Client-ID': '8fe6uv07vt46g1nfr9t9iafznil012', Authorization: 'Bearer jlnmgwfhfexo93oexnlsq0ypiig1ur', 'Access-Control-Allow-Origin': '*'}}
-  const data = `fields name, cover.url, slug; search "${search_query}"; limit 15;)`
+    const config = {headers: {Accept: 'application/json', 'Client-ID': 'ze5xar99r5cxnnfqdkn89awd2u4isu', Authorization: 'Bearer xy9jqm8nsrjst0h6kzejtz5onzfrjg', 'Access-Control-Allow-Origin': '*'}}
+  const data = `fields name, cover.url, slug; search "${search_query}"; limit 20;)`
   axios.post('https://api.igdb.com/v4/games',data,config,(err, req, res, next) => {
   
   }).then((res) => {
   const result = res.data
-  const collection = result[0].collection
+  let name = 'Not available'
   searchResults_nocover = []
   searchResults_cover = []
-    console.log(result[0])
+  console.log(result)
   result.forEach(element => {
+    name = element.name || 'Not Available'
     string = element.slug
+    id = element.id
     if (element.cover == undefined){
         searchResults_nocover.push(element)
     }
@@ -39,7 +41,7 @@ router.get('', (request, response) => {
     
   });
 
-  response.render('search', {page: currentPage, image_covers: searchResults_cover})
+  response.render('gamesearch', {searchQ: search_query,page: currentPage, image_covers: searchResults_cover, name: name, id: id, slug: string})
   }, 
 
   ).catch((err) => {

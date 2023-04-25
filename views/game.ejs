@@ -1,18 +1,18 @@
 <%- include('partials/navigation') %>
 <div class="cover-image">
-    <img src=<%-cover_image%> alt="">
+    <img src="<%=cover_image%>" alt="">
 </div>
 
 <div class="game-content-container">
     <div class="game-logo">
-        <img src=<%-game_cover%> alt="">
-        <div class="game-rating"><p><%-rating%></p></div>
+        <img src="<%=game_cover%>"alt="">
+        <div class="game-rating"><p><%=rating%></p></div>
     </div>
     
     <div class="game-name">
         <h1><%-name%></h1>
-        <p>Developed by: <span class="accented-text"><%-developer || 'Sorry, information unavailable'%></span></p>
-        <p class="published-by">Published by: <span class="accented-text"><%-publisher || 'Sorry, information unavailable'%> </span></p>
+        <p>Developed by: <span class="accented-text"><%=developer%></span></p>
+        <p class="published-by">Published by: <span class="accented-text"><%=publisher%></span></p>
     </div>
     <div class="rating-btn-container">
     <button class="rating-btns">

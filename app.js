@@ -69,7 +69,8 @@ app.use('/games', express.static('public'))
 app.use('/profile', express.static('public'))
 app.use('/games', express.static('public'))
 app.use('/games/game', express.static('public'))
-app.use('/search', express.static('public'))
+app.use('/search/games', express.static('public'))
+
 
  
 app.use((req, res, next) => {
